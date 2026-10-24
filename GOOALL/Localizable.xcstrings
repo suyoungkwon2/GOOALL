@@ -1,0 +1,219 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%@ / %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ / %2$@"
+          }
+        }
+      }
+    },
+    "%@ / %@%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ / %2$@%3$@"
+          }
+        }
+      }
+    },
+    "%@ %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$lld"
+          }
+        }
+      }
+    },
+    "%@ steps to go" : {
+
+    },
+    "%lld" : {
+
+    },
+    "Back to now" : {
+
+    },
+    "Belly era → Six-pack era" : {
+
+    },
+    "Bigger widget = bigger glow-up. Trust me." : {
+
+    },
+    "Can I peek at your steps?" : {
+
+    },
+    "Daily" : {
+
+    },
+    "Done" : {
+
+    },
+    "Eye Glow" : {
+
+    },
+    "Eyes sparkling. Main character energy ✨" : {
+
+    },
+    "Goal" : {
+
+    },
+    "Goal crushed 🎉" : {
+
+    },
+    "Hey, open %@ to set me up 👋" : {
+
+    },
+    "Hit your goal and the %@ is yours. Every. Single. Day." : {
+
+    },
+    "Hmm, I'm seeing 0 steps. If Health access is off, you can turn it on in Settings." : {
+
+    },
+    "I only read your step count from Health. Read-only, and it never leaves your phone. Pinky promise 🤙" : {
+
+    },
+    "Illustration: home screen with the large GOOALL widget" : {
+
+    },
+    "Last step, and it's the big one!" : {
+
+    },
+    "Let's go" : {
+
+    },
+    "Long-press an empty spot" : {
+
+    },
+    "Maybe later" : {
+
+    },
+    "Next" : {
+
+    },
+    "Now pick your goal" : {
+
+    },
+    "Okay, what's your vibe?" : {
+
+    },
+    "Open Settings" : {
+
+    },
+    "Period" : {
+
+    },
+    "Pick the big one" : {
+
+    },
+    "Pick the look you want. Every step you take changes your home screen. Literally." : {
+
+    },
+    "Put me on your home screen." : {
+
+    },
+    "Resets every Sunday. New week, new you." : {
+
+    },
+    "Search \"%@\"" : {
+
+    },
+    "Settings" : {
+
+    },
+    "Six-Pack" : {
+
+    },
+    "Six-pack: unlocked. You ate that 🔥" : {
+
+    },
+    "Sleepy eyes? Same. Let's wake them up 👀" : {
+
+    },
+    "Sneak peek" : {
+
+    },
+    "stage %lld of %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "stage %1$lld of %2$lld"
+          }
+        }
+      }
+    },
+    "steps" : {
+
+    },
+    "Steps" : {
+
+    },
+    "Sure, go ahead" : {
+
+    },
+    "Tap + at the top left" : {
+
+    },
+    "Theme" : {
+
+    },
+    "This week" : {
+
+    },
+    "Today" : {
+
+    },
+    "Today %@ / avg goal %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Today %1$@ / avg goal %2$@"
+          }
+        }
+      }
+    },
+    "Turn it on" : {
+
+    },
+    "Walk it. Get it." : {
+
+    },
+    "Wanna see your real steps? Let me peek at Health." : {
+
+    },
+    "Weekly" : {
+
+    },
+    "Whatever you pick shows up on your widget. You can switch anytime, no pressure." : {
+
+    },
+    "Whoa, let's keep it between %@ and %@ steps. Fixed it for you 💅" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Whoa, let's keep it between %1$@ and %2$@ steps. Fixed it for you 💅"
+          }
+        }
+      }
+    },
+    "Your six-pack's waiting. Let's get walking 🚶‍♀️" : {
+
+    },
+    "Your steps update about once an hour (iOS decides the exact timing). Open the app to refresh right away." : {
+
+    },
+    "Zombie eyes → Sparkly eyes" : {
+
+    }
+  },
+  "version" : "1.0"
+}

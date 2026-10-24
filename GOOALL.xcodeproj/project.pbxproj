@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		9B17E11F308D273C000037CC /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B17E11E308D273C000037CC /* WidgetKit.framework */; };
+		9B17E121308D273C000037CC /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B17E120308D273C000037CC /* SwiftUI.framework */; };
+		9B17E12C308D273D000037CC /* widgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9B17E11C308D273C000037CC /* widgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		9B17E0FC308D26DC000037CC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -21,17 +27,62 @@
 			remoteGlobalIDString = 9B17E0ED308D26DB000037CC;
 			remoteInfo = GOOALL;
 		};
+		9B17E12A308D273D000037CC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9B17E0E6308D26DB000037CC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B17E11B308D273C000037CC;
+			remoteInfo = widgetExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9B17E131308D273D000037CC /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				9B17E12C308D273D000037CC /* widgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		9B17E0EE308D26DB000037CC /* GOOALL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GOOALL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B17E0FB308D26DC000037CC /* GOOALLTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GOOALLTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B17E105308D26DC000037CC /* GOOALLUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GOOALLUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B17E11C308D273C000037CC /* widgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = widgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B17E11E308D273C000037CC /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		9B17E120308D273C000037CC /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		9B17E133308D27AF000037CC /* widgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = widgetExtension.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		9B17E12D308D273D000037CC /* Exceptions for "widget" folder in "widgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 9B17E11B308D273C000037CC /* widgetExtension */;
+		};
+		9B17E135308D27DB000037CC /* Exceptions for "GOOALL" folder in "GOOALL" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 9B17E0ED308D26DB000037CC /* GOOALL */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		9B17E0F0308D26DB000037CC /* GOOALL */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				9B17E135308D27DB000037CC /* Exceptions for "GOOALL" folder in "GOOALL" target */,
+			);
 			path = GOOALL;
 			sourceTree = "<group>";
 		};
@@ -43,6 +94,19 @@
 		9B17E108308D26DC000037CC /* GOOALLUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = GOOALLUITests;
+			sourceTree = "<group>";
+		};
+		9B17E122308D273C000037CC /* widget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				9B17E12D308D273D000037CC /* Exceptions for "widget" folder in "widgetExtension" target */,
+			);
+			path = widget;
+			sourceTree = "<group>";
+		};
+		9B17E140308D2800000037CC /* Shared */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -69,15 +133,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9B17E119308D273C000037CC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B17E121308D273C000037CC /* SwiftUI.framework in Frameworks */,
+				9B17E11F308D273C000037CC /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		9B17E0E5308D26DB000037CC = {
 			isa = PBXGroup;
 			children = (
+				9B17E133308D27AF000037CC /* widgetExtension.entitlements */,
 				9B17E0F0308D26DB000037CC /* GOOALL */,
 				9B17E0FE308D26DC000037CC /* GOOALLTests */,
 				9B17E108308D26DC000037CC /* GOOALLUITests */,
+				9B17E122308D273C000037CC /* widget */,
+				9B17E140308D2800000037CC /* Shared */,
+				9B17E11D308D273C000037CC /* Frameworks */,
 				9B17E0EF308D26DB000037CC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,8 +165,18 @@
 				9B17E0EE308D26DB000037CC /* GOOALL.app */,
 				9B17E0FB308D26DC000037CC /* GOOALLTests.xctest */,
 				9B17E105308D26DC000037CC /* GOOALLUITests.xctest */,
+				9B17E11C308D273C000037CC /* widgetExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		9B17E11D308D273C000037CC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9B17E11E308D273C000037CC /* WidgetKit.framework */,
+				9B17E120308D273C000037CC /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -102,13 +189,16 @@
 				9B17E0EA308D26DB000037CC /* Sources */,
 				9B17E0EB308D26DB000037CC /* Frameworks */,
 				9B17E0EC308D26DB000037CC /* Resources */,
+				9B17E131308D273D000037CC /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				9B17E12B308D273D000037CC /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				9B17E0F0308D26DB000037CC /* GOOALL */,
+				9B17E140308D2800000037CC /* Shared */,
 			);
 			name = GOOALL;
 			packageProductDependencies = (
@@ -163,6 +253,29 @@
 			productReference = 9B17E105308D26DC000037CC /* GOOALLUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		9B17E11B308D273C000037CC /* widgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B17E12E308D273D000037CC /* Build configuration list for PBXNativeTarget "widgetExtension" */;
+			buildPhases = (
+				9B17E118308D273C000037CC /* Sources */,
+				9B17E119308D273C000037CC /* Frameworks */,
+				9B17E11A308D273C000037CC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				9B17E122308D273C000037CC /* widget */,
+				9B17E140308D2800000037CC /* Shared */,
+			);
+			name = widgetExtension;
+			packageProductDependencies = (
+			);
+			productName = widgetExtension;
+			productReference = 9B17E11C308D273C000037CC /* widgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -184,6 +297,9 @@
 						CreatedOnToolsVersion = 26.6;
 						TestTargetID = 9B17E0ED308D26DB000037CC;
 					};
+					9B17E11B308D273C000037CC = {
+						CreatedOnToolsVersion = 26.6;
+					};
 				};
 			};
 			buildConfigurationList = 9B17E0E9308D26DB000037CC /* Build configuration list for PBXProject "GOOALL" */;
@@ -203,6 +319,7 @@
 				9B17E0ED308D26DB000037CC /* GOOALL */,
 				9B17E0FA308D26DC000037CC /* GOOALLTests */,
 				9B17E104308D26DC000037CC /* GOOALLUITests */,
+				9B17E11B308D273C000037CC /* widgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -223,6 +340,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		9B17E103308D26DC000037CC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B17E11A308D273C000037CC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -253,6 +377,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9B17E118308D273C000037CC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -265,6 +396,11 @@
 			isa = PBXTargetDependency;
 			target = 9B17E0ED308D26DB000037CC /* GOOALL */;
 			targetProxy = 9B17E106308D26DC000037CC /* PBXContainerItemProxy */;
+		};
+		9B17E12B308D273D000037CC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9B17E11B308D273C000037CC /* widgetExtension */;
+			targetProxy = 9B17E12A308D273D000037CC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -395,16 +531,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = GOOALL/GOOALL.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YZVFY2D4GM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GOOALL/Info.plist;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Your step count is used to change the widget image as you reach your goal.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -427,16 +567,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = GOOALL/GOOALL.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YZVFY2D4GM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = GOOALL/Info.plist;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Your step count is used to change the widget image as you reach your goal.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -462,7 +606,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YZVFY2D4GM;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mel.GOOALLTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -484,7 +628,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YZVFY2D4GM;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mel.GOOALLTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -505,6 +649,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YZVFY2D4GM;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mel.GOOALLUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -525,6 +670,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YZVFY2D4GM;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mel.GOOALLUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -535,6 +681,70 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = GOOALL;
+			};
+			name = Release;
+		};
+		9B17E12F308D273D000037CC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = widgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YZVFY2D4GM;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = widget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = widget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mel.GOOALL.widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9B17E130308D273D000037CC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = widgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YZVFY2D4GM;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = widget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = widget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mel.GOOALL.widget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -573,6 +783,15 @@
 			buildConfigurations = (
 				9B17E116308D26DC000037CC /* Debug */,
 				9B17E117308D26DC000037CC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9B17E12E308D273D000037CC /* Build configuration list for PBXNativeTarget "widgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B17E12F308D273D000037CC /* Debug */,
+				9B17E130308D273D000037CC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

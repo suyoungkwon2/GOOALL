@@ -1,0 +1,12 @@
+# Xcode
+xcuserdata/
+DerivedData/
+build/
+*.xcresult
+*.pbxproj.bak
+
+# macOS
+.DS_Store
+
+# Local tooling state
+.omc/
