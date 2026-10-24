@@ -1,0 +1,13 @@
+{
+  "images": [
+    {
+      "filename": "eyeglow_large_05.png",
+      "idiom": "universal",
+      "scale": "3x"
+    }
+  ],
+  "info": {
+    "author": "xcode",
+    "version": 1
+  }
+}

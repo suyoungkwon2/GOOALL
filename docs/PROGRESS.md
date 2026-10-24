@@ -21,3 +21,5 @@ pm 에이전트가 관리. 작업이 끝날 때마다 한 줄씩 추가.
 - [2026-10-24] [qa] M1~M3 QA: 빌드 3종 경고 0, 테스트 통과. 🔴1 🟡7 🟢다수
 - [2026-10-24] [main] QA 반영: 🔴 설정 화면 주간 목표 덮어쓰기 수정, 🟡 지난 기간 스냅샷 표시/저장, 동시 refresh 경합, 목표 입력 커밋, 위젯 이미지 fullColor, 스펙 체크박스 갱신. AppModel 테스트 추가(테스트 42건 통과). 미처리: 앱 내 개인정보 처리방침 링크(URL 대기)
 - [2026-10-24] [main] CI 도입: scripts/ci.sh + GitHub Actions(.github/workflows/ci.yml), 테스트 계획 docs/TEST_PLAN.md — 다음: GitHub 업로드 후 CI 결과 확인
+- [2026-10-24] [main] GitHub 업로드(suyoungkwon2/GOOALL) + 첫 CI 성공 (https://github.com/suyoungkwon2/GOOALL/actions/runs/40132003819)
+- [2026-10-24] [asset-integrator] eyeglow 1~5단계 시험 등록 — 원본 2929×1106 투명 배경 → 흰 배경·규격 크기 변환본(large/medium), 원본은 Assets/Themes/eyeglow/original/. 0·6~10단계는 플레이스홀더. 오버레이 캡슐 대비 강화

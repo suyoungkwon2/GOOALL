@@ -62,7 +62,7 @@ struct HomeGoalView: View {
         .padding(.horizontal, 14)
         .padding(.vertical, 7)
         // 이미지 밝기와 상관없이 라이트/다크 모두 읽히도록 반투명 배경을 깐다
-        .background(.black.opacity(0.3), in: .capsule)
+        .background(.black.opacity(0.55), in: .capsule)
         .padding(size == .large ? 14 : 10)
     }
 }

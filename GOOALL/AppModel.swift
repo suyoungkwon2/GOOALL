@@ -163,7 +163,7 @@ final class AppModel {
         await refresh()
     }
 
-    /// 시뮬레이터 스크린샷용: -debugOnboardingStep <step>, -debugSkipOnboarding, -debugMockSteps <n>, -debugPeriod weekly
+    /// 시뮬레이터 스크린샷용: -debugOnboardingStep <step>, -debugSkipOnboarding, -debugMockSteps <n>, -debugPeriod weekly, -debugTheme <id>
     private func applyDebugLaunchArguments() {
         let arguments = ProcessInfo.processInfo.arguments
         func value(after flag: String) -> String? {
@@ -179,6 +179,9 @@ final class AppModel {
         if let raw = value(after: "-debugPeriod"), let period = GoalPeriod(rawValue: raw) {
             settings.period = period
             settings.target = MetricDescriptor.for(settings.metric).defaultTarget(for: period)
+        }
+        if let themeID = value(after: "-debugTheme"), ThemeRegistry.theme(id: themeID) != nil {
+            settings.themeID = themeID
         }
         if let raw = value(after: "-debugMockSteps"), let steps = Int(raw) {
             debugMockSteps = steps
