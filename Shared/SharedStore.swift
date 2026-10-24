@@ -8,6 +8,7 @@ nonisolated struct SharedStore: @unchecked Sendable {
         case progressSnapshot
         case onboardingState
         case healthAuthRequested
+        case widgetAppearance
         case schemaVersion
         #if DEBUG
         case debugMockSteps
@@ -38,6 +39,12 @@ nonisolated struct SharedStore: @unchecked Sendable {
     var onboardingState: OnboardingState? {
         get { load(OnboardingState.self, .onboardingState) }
         nonmutating set { save(newValue, .onboardingState) }
+    }
+
+    /// F07. 없거나 깨져 있으면 Auto(.default)
+    var widgetAppearance: WidgetAppearance {
+        get { load(WidgetAppearance.self, .widgetAppearance) ?? .default }
+        nonmutating set { save(newValue, .widgetAppearance) }
     }
 
     var healthAuthRequested: Bool {

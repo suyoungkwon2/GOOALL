@@ -42,6 +42,17 @@ struct SettingsView: View {
                     Text("Your steps update about once an hour (iOS decides the exact timing). Open the app to refresh right away.")
                 }
 
+                Section("Widget") {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("Background")
+                        BackgroundPicker(selection: Binding(
+                            get: { model.appearance },
+                            set: { model.updateAppearance($0) }
+                        ))
+                    }
+                    .padding(.vertical, 4)
+                }
+
                 #if DEBUG
                 DebugSection()
                 #endif

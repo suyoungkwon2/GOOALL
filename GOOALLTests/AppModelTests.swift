@@ -26,7 +26,7 @@ struct AppModelTests {
         SharedStore(defaults: UserDefaults(suiteName: "AppModelTests-\(UUID().uuidString)")!)
     }
 
-    @Test func refreshStoresSnapshot() async {
+    @Test func refreshStoresSnapshot() async throws {
         let store = makeStore()
         let health = FakeHealthSource()
         health.steps = 6_240
@@ -36,7 +36,13 @@ struct AppModelTests {
 
         #expect(model.snapshot?.value == 6_240)
         #expect(model.snapshot?.stage == 6)
-        #expect(store.progressSnapshot == model.snapshot)
+        // JSON 저장 시 updatedAt의 소수점 아래 미세한 자리는 달라질 수 있어 따로 비교한다
+        let saved = try #require(store.progressSnapshot)
+        let current = try #require(model.snapshot)
+        #expect(saved.value == current.value)
+        #expect(saved.stage == current.stage)
+        #expect(saved.periodStart == current.periodStart)
+        #expect(abs(saved.updatedAt.timeIntervalSince(current.updatedAt)) < 0.001)
     }
 
     @Test func failedRefreshKeepsLastSnapshot() async {

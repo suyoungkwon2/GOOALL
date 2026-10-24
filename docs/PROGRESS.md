@@ -23,3 +23,4 @@ pm 에이전트가 관리. 작업이 끝날 때마다 한 줄씩 추가.
 - [2026-10-24] [main] CI 도입: scripts/ci.sh + GitHub Actions(.github/workflows/ci.yml), 테스트 계획 docs/TEST_PLAN.md — 다음: GitHub 업로드 후 CI 결과 확인
 - [2026-10-24] [main] GitHub 업로드(suyoungkwon2/GOOALL) + 첫 CI 성공 (https://github.com/suyoungkwon2/GOOALL/actions/runs/40132003819)
 - [2026-10-24] [asset-integrator] eyeglow 1~5단계 시험 등록 — 원본 2929×1106 투명 배경 → 흰 배경·규격 크기 변환본(large/medium), 원본은 Assets/Themes/eyeglow/original/. 0·6~10단계는 플레이스홀더. 오버레이 캡슐 대비 강화
+- [2026-10-24] [main] F07 위젯 배경 색: Auto + 파스텔 7색, 선 그림 자동 색(다크 → 흰 선), 온보딩 위젯 미리보기·설정에서 선택, 오늘 화면 동일 적용. eyeglow 이미지 투명 배경으로 재생성. 테스트 62건 통과

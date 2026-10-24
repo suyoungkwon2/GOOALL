@@ -50,6 +50,39 @@ struct ThemeRegistryTests {
     }
 }
 
+/// F07 배경 색
+struct WidgetBackgroundTests {
+
+    @Test func autoFollowsLightAndDark() {
+        #expect(WidgetBackgrounds.backgroundHex(id: "system", isDark: false) == "#FFFFFF")
+        #expect(WidgetBackgrounds.backgroundHex(id: "system", isDark: true) == "#1C1C1E")
+        #expect(!WidgetBackgrounds.usesLightLines(onHex: "#FFFFFF"))
+        #expect(WidgetBackgrounds.usesLightLines(onHex: "#1C1C1E"))
+    }
+
+    @Test func pastelPresetsUseDarkLinesAndMidnightUsesLight() {
+        for preset in WidgetBackgrounds.presets where preset.id != "midnight" {
+            #expect(!WidgetBackgrounds.usesLightLines(onHex: preset.hex), "\(preset.id)")
+        }
+        #expect(WidgetBackgrounds.usesLightLines(onHex: WidgetBackgrounds.presets.first { $0.id == "midnight" }!.hex))
+    }
+
+    @Test func presetsIgnoreDarkModeAndUnknownIDFallsBackToAuto() {
+        #expect(WidgetBackgrounds.backgroundHex(id: "pink", isDark: true) == "#FFD6E2")
+        #expect(WidgetBackgrounds.backgroundHex(id: "nope", isDark: true) == "#1C1C1E")
+        #expect(WidgetBackgrounds.backgroundHex(id: "nope", isDark: false) == "#FFFFFF")
+    }
+
+    @Test func storeDefaultsToAutoAndRoundTrips() {
+        let store = SharedStore(defaults: UserDefaults(suiteName: "WidgetBackgroundTests-\(UUID().uuidString)")!)
+        #expect(store.widgetAppearance == .default)
+        store.widgetAppearance = WidgetAppearance(backgroundID: "mint")
+        #expect(store.widgetAppearance.backgroundID == "mint")
+        store.defaults.set(Data("broken".utf8), forKey: SharedStore.Key.widgetAppearance.rawValue)
+        #expect(store.widgetAppearance == .default)
+    }
+}
+
 struct SharedStoreTests {
 
     private func makeStore() -> SharedStore {

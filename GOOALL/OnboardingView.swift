@@ -1,4 +1,5 @@
 import SwiftUI
+import WidgetKit
 
 /// F01 온보딩: 소개 → 테마 → 목표 → 건강 권한 → 위젯 안내. 단계는 저장되어 재실행 시 이어서 시작한다.
 struct OnboardingView: View {
@@ -103,7 +104,7 @@ private struct IntroStep: View {
                 Text(AppConstants.appName)
                     .font(.system(size: 48, weight: .black, design: .rounded))
                     .tracking(-1)
-                StageImageView(theme: theme, stage: stage, size: .large)
+                StageCard(theme: theme, stage: stage, size: .large, appearance: model.appearance)
                     .aspectRatio(1092.0 / 1146.0, contentMode: .fit)
                     .clipShape(.rect(cornerRadius: 32))
                     .contentTransition(.opacity)
@@ -155,6 +156,7 @@ private struct ThemeStep: View {
 
 /// 좌우로 밀면 0단계 → 마지막 단계 미리보기 (F01-R2)
 private struct ThemeCard: View {
+    @Environment(AppModel.self) private var model
     let theme: Theme
     let isSelected: Bool
 
@@ -162,7 +164,7 @@ private struct ThemeCard: View {
         VStack(alignment: .leading, spacing: 10) {
             TabView {
                 ForEach(0...theme.lastStage, id: \.self) { stage in
-                    StageImageView(theme: theme, stage: stage, size: .medium)
+                    StageCard(theme: theme, stage: stage, size: .medium, appearance: model.appearance)
                 }
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
@@ -301,17 +303,34 @@ private struct WidgetGuideStep: View {
             primaryTitle: "Done",
             primaryAction: { model.completeOnboarding() }
         ) {
-            VStack(alignment: .leading, spacing: 16) {
-                IllustrationPlaceholder(description: "Illustration: home screen with the large GOOALL widget")
-                    .frame(maxHeight: 220)
-                VStack(alignment: .leading, spacing: 10) {
+            VStack(alignment: .leading, spacing: 14) {
+                // 실제 위젯 모습 미리보기 + 배경 색 선택 (F07-R5)
+                WidgetPreview(
+                    snapshot: .sample(themeID: model.theme.id, stage: model.theme.lastStage / 2),
+                    family: .systemLarge,
+                    appearance: model.appearance
+                )
+                // 실제 Large 위젯 크기로 그린 뒤 축소 (글자 비율 유지)
+                .frame(width: 364, height: 382)
+                .clipShape(.rect(cornerRadius: 44))
+                .scaleEffect(0.52)
+                .frame(width: 364 * 0.52, height: 382 * 0.52)
+                .shadow(color: .black.opacity(0.15), radius: 10, y: 4)
+                .frame(maxWidth: .infinity)
+                Text("Pick a color that vibes with your home screen 🎨")
+                    .font(.subheadline.weight(.semibold))
+                BackgroundPicker(selection: Binding(
+                    get: { model.appearance },
+                    set: { model.updateAppearance($0) }
+                ))
+                VStack(alignment: .leading, spacing: 8) {
                     GuideRow(number: 1, text: "Long-press an empty spot")
                     GuideRow(number: 2, text: "Tap + at the top left")
                     GuideRow(number: 3, text: "Search \"\(AppConstants.appName)\"")
                     GuideRow(number: 4, text: "Pick the big one")
                 }
                 Text("Bigger widget = bigger glow-up. Trust me.")
-                    .font(.callout.weight(.semibold))
+                    .font(.footnote.weight(.semibold))
             }
         }
     }

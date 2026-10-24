@@ -11,6 +11,7 @@ import SwiftUI
 struct GoalEntry: TimelineEntry {
     let date: Date
     let snapshot: ProgressSnapshot?
+    var appearance: WidgetAppearance = .default
 }
 
 /// App Group 스냅샷만 읽는다 (F05-R4). 타임라인 = 현재 + 리셋 엔트리, 1시간 후 재요청 (F05-R5).
@@ -20,36 +21,47 @@ struct GoalProvider: TimelineProvider {
     }
 
     func getSnapshot(in context: Context, completion: @escaping (GoalEntry) -> Void) {
-        let stored = SharedStore.shared.progressSnapshot
+        let store = SharedStore.shared
         // 위젯 갤러리에서는 데이터가 없어도 샘플로 보여준다
-        completion(GoalEntry(date: .now, snapshot: stored ?? (context.isPreview ? .sample(stage: 5) : nil)))
+        completion(GoalEntry(
+            date: .now,
+            snapshot: store.progressSnapshot ?? (context.isPreview ? .sample(stage: 5) : nil),
+            appearance: store.widgetAppearance
+        ))
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<GoalEntry>) -> Void) {
         let now = Date()
         let refresh = now.addingTimeInterval(60 * 60)
-        guard let stored = SharedStore.shared.progressSnapshot else {
-            completion(Timeline(entries: [GoalEntry(date: now, snapshot: nil)], policy: .after(refresh)))
+        let store = SharedStore.shared
+        let appearance = store.widgetAppearance
+        guard let stored = store.progressSnapshot else {
+            completion(Timeline(entries: [GoalEntry(date: now, snapshot: nil, appearance: appearance)], policy: .after(refresh)))
             return
         }
         let snapshots = ProgressEngine.timelineSnapshots(from: stored, now: now, calendar: .current)
-        let entries = [GoalEntry(date: now, snapshot: snapshots[0])]
-            + snapshots.dropFirst().map { GoalEntry(date: $0.periodStart, snapshot: $0) }
+        let entries = [GoalEntry(date: now, snapshot: snapshots[0], appearance: appearance)]
+            + snapshots.dropFirst().map { GoalEntry(date: $0.periodStart, snapshot: $0, appearance: appearance) }
         completion(Timeline(entries: entries, policy: .after(refresh)))
     }
 }
 
 struct GoalWidgetEntryView: View {
     @Environment(\.widgetFamily) private var family
+    @Environment(\.colorScheme) private var colorScheme
     let entry: GoalEntry
 
     var body: some View {
+        // 사용자가 고른 배경 색 (F07). 투명/틴트 홈 화면에서는 시스템이 이 배경을 걷어낸다.
+        let colors = WidgetBackgrounds.colors(id: entry.appearance.backgroundID, colorScheme: colorScheme)
         GoalWidgetContent(snapshot: entry.snapshot, family: family)
+            .environment(\.stageColors, colors)
+            .foregroundStyle(family == .accessoryRectangular ? Color.primary : colors.line)
             .containerBackground(for: .widget) {
                 if family == .accessoryRectangular {
                     Color.clear
                 } else {
-                    Color(.systemBackground)
+                    colors.background
                 }
             }
     }

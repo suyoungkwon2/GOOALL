@@ -18,6 +18,7 @@ final class AppModel {
     private(set) var snapshot: ProgressSnapshot?
     private(set) var onboarding: OnboardingState
     private(set) var healthAuthRequested: Bool
+    private(set) var appearance: WidgetAppearance
     /// 날짜가 바뀌면 갱신되어 displaySnapshot을 다시 계산하게 한다
     private var dayTick = Date()
     #if DEBUG
@@ -31,6 +32,7 @@ final class AppModel {
         snapshot = store.progressSnapshot
         onboarding = store.onboardingState ?? .initial
         healthAuthRequested = store.healthAuthRequested
+        appearance = store.widgetAppearance
         #if DEBUG
         debugMockSteps = store.debugMockSteps
         applyDebugLaunchArguments()
@@ -89,6 +91,15 @@ final class AppModel {
             await refresh()
             WidgetCenter.shared.reloadAllTimelines()
         }
+    }
+
+    // MARK: - Widget appearance (F07)
+
+    func updateAppearance(_ newAppearance: WidgetAppearance) {
+        guard newAppearance != appearance else { return }
+        appearance = newAppearance
+        store.widgetAppearance = newAppearance
+        WidgetCenter.shared.reloadAllTimelines()
     }
 
     // MARK: - Health (F02)
@@ -163,7 +174,7 @@ final class AppModel {
         await refresh()
     }
 
-    /// 시뮬레이터 스크린샷용: -debugOnboardingStep <step>, -debugSkipOnboarding, -debugMockSteps <n>, -debugPeriod weekly, -debugTheme <id>
+    /// 시뮬레이터 스크린샷용: -debugOnboardingStep <step>, -debugSkipOnboarding, -debugMockSteps <n>, -debugPeriod weekly, -debugTheme <id>, -debugBackground <id>
     private func applyDebugLaunchArguments() {
         let arguments = ProcessInfo.processInfo.arguments
         func value(after flag: String) -> String? {
@@ -182,6 +193,9 @@ final class AppModel {
         }
         if let themeID = value(after: "-debugTheme"), ThemeRegistry.theme(id: themeID) != nil {
             settings.themeID = themeID
+        }
+        if let backgroundID = value(after: "-debugBackground") {
+            appearance = WidgetAppearance(backgroundID: backgroundID)
         }
         if let raw = value(after: "-debugMockSteps"), let steps = Int(raw) {
             debugMockSteps = steps

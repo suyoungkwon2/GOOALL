@@ -15,7 +15,8 @@ nonisolated enum ThemeRegistry {
             overlayTextColorHex: "#FFFFFF",
             startMessage: String(localized: "Your six-pack's waiting. Let's get walking 🚶‍♀️"),
             doneMessage: String(localized: "Six-pack: unlocked. You ate that 🔥"),
-            access: .free
+            access: .free,
+            artStyle: .lineArt
         ),
         Theme(
             id: "eyeglow",
@@ -26,7 +27,8 @@ nonisolated enum ThemeRegistry {
             overlayTextColorHex: "#FFFFFF",
             startMessage: String(localized: "Sleepy eyes? Same. Let's wake them up 👀"),
             doneMessage: String(localized: "Eyes sparkling. Main character energy ✨"),
-            access: .free
+            access: .free,
+            artStyle: .lineArt
         ),
     ]
 

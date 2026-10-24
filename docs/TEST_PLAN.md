@@ -29,9 +29,9 @@
 | 파일 | 대상 | 확인하는 스펙 |
 |---|---|---|
 | `ProgressEngineTests.swift` | 진행률·단계·기간·일평균·스냅샷 | F03 수용 기준 전부 (경계값, 자정, 일요일 리셋, 로케일 무관, 서머타임, 비정상 입력) |
-| `SharedModelTests.swift` | 목표 기본값·범위 보정, ThemeRegistry, SharedStore | F01-R5/R8, F04-R2/R7, DATA_MODEL §5 |
+| `SharedModelTests.swift` | 목표 기본값·범위 보정, ThemeRegistry, SharedStore, 위젯 배경 색·선 색 | F01-R5/R8, F04-R2/R7, F07, DATA_MODEL §5·6 |
 | `AppModelTests.swift` | 갱신·설정 변경 흐름 (가짜 HealthDataSource 주입) | F01-R6, F02-R2/R5, F06 (지난 기간 스냅샷은 0) |
-| `WidgetTimelineTests.swift` | 위젯 타임라인 + 위젯 화면 렌더 | F05-R5/R8, F05 수용 기준 1·2·3 |
+| `WidgetTimelineTests.swift` | 위젯 타임라인 + 위젯 화면 렌더 (배경 8종 × 라이트/다크 포함) | F05-R5/R8, F05 수용 기준 1·2·3, F07 |
 
 규칙:
 - 동작이 바뀌는 코드에는 같은 작업에서 테스트를 추가하거나 고친다 (스펙 갱신과 함께).
@@ -42,7 +42,7 @@
 ## 4. 시뮬레이터 화면 확인 (DEBUG 빌드 전용 런치 인자)
 ```
 xcrun simctl launch <SIM_ID> com.mel.GOOALL -debugOnboardingStep intro|theme|goal|health|widgetGuide
-xcrun simctl launch <SIM_ID> com.mel.GOOALL -debugSkipOnboarding -debugMockSteps 6240 [-debugPeriod weekly]
+xcrun simctl launch <SIM_ID> com.mel.GOOALL -debugSkipOnboarding -debugMockSteps 6240 [-debugPeriod weekly] [-debugTheme eyeglow] [-debugBackground pink]
 xcrun simctl io <SIM_ID> screenshot shot.png
 ```
 - 확인 기기: 기본 iPhone 17, 레이아웃 변경 시 가장 작은 기기(iPhone 17e)와 가장 큰 기기(Pro Max)도.
@@ -57,7 +57,7 @@ xcrun simctl io <SIM_ID> screenshot shot.png
 - [ ] 오늘 화면 걸음 수가 건강 앱과 같다
 - [ ] 목표 숫자 입력 후 키보드를 닫지 않고 Next → 입력값 반영·범위 보정 (F01)
 - [ ] 홈 화면에 Large/Medium, 잠금화면에 직사각형 위젯 추가 → 앱과 같은 단계 (F05, F06)
-- [ ] 설정에서 테마 변경 → 5초 안에 위젯 반영 (F01-R6)
+- [ ] 설정에서 테마·배경 색 변경 → 5초 안에 위젯 반영 (F01-R6, F07-R5)
 - [ ] 앱을 강제 종료하지 않고 걷기 → 보통 1시간 안에 위젯 단계 변경 (F02, F05)
 - [ ] 자정 지나서 앱을 열지 않아도 위젯 0 상태 (F05), 앱을 켜 둔 채 자정 → 앱도 0 (F06)
 - [ ] 틴트/클리어 홈 화면 모드에서 위젯이 읽힌다
@@ -74,3 +74,4 @@ MVP 기능과 실기기 테스트가 끝난 뒤(M5) 붙인다. 계획:
 
 ## 변경 이력
 - 2026-10-24: 최초 작성 (CI 도입, QA 1차 결과 반영)
+- 2026-10-24: F07(위젯 배경 색) 테스트·체크리스트 추가

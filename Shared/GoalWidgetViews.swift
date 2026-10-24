@@ -55,6 +55,8 @@ struct HomeGoalView: View {
                 }
                 Text("\(snapshot.value.formatted()) / \(snapshot.target.formatted())")
                     .monospacedDigit()
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
             }
             .font(.system(size: size == .large ? 20 : 16, weight: .black, design: .rounded))
         }

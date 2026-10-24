@@ -65,6 +65,7 @@
 - Title: **Last step, and it's the big one!**
 - Subtitle: Put me on your home screen.
 - 단계: Long-press an empty spot → Tap + at the top left → Search "GOOALL" → Pick the big one
+- 일러스트 자리: 실제 Large 위젯 미리보기(선택한 테마·배경 색) + 배경 색 선택 (F07-R5)
 - Body: Bigger widget = bigger glow-up. Trust me.
 - Button: Done
 
@@ -92,3 +93,4 @@
 - 2026-10-24: MVP 지표를 걸음 수로 한정(R3 취소 → R9), 운동 시간 기본값·범위 삭제. 문구를 영어(Gen Z 친구 톤)로 확정(R10). 주간 시작을 일요일로 고정. 데이터 모델을 DATA_MODEL.md로 분리
 - 2026-10-24: 구현(GOOALL/OnboardingView.swift, SettingsView.swift, GoalTargetField.swift, Localizable.xcstrings). 텍스트 플레이스홀더, Next 보정 동작 명시
 - 2026-10-24: QA 반영 — 설정 화면을 열 때 주간 목표가 기본값으로 덮어써지던 버그 수정, 목표 숫자 입력이 키 입력마다 반영되도록 변경, 설정 변경 시 지난 기간 값을 옮기지 않음
+- 2026-10-24: 위젯 안내 화면에 위젯 미리보기와 배경 색 선택 추가 (F07)

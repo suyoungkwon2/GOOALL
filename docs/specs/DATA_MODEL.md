@@ -83,6 +83,7 @@ struct Theme: Identifiable, Equatable, Sendable {
     let startMessage: String          // 0단계 응원 문구
     let doneMessage: String           // 100% 달성 문구
     let access: ThemeAccess
+    let artStyle: ArtStyle            // .lineArt | .fullColor (F07-R3/R4)
 }
 ```
 - 이미지 이름은 저장하지 않고 규칙으로 만든다: `"<id>_<size>_<stage 2자리>"` (`ThemeRegistry.imageName(theme:size:stage:)`).
@@ -96,6 +97,7 @@ App Group `group.com.mel.GOOALL`의 `UserDefaults(suiteName:)`에 JSON(`JSONEnco
 | `progressSnapshot` | ProgressSnapshot | 앱(포그라운드·백그라운드 전달) | 앱, 위젯 |
 | `onboardingState` | OnboardingState | 앱 | 앱 |
 | `healthAuthRequested` | Bool | 앱 | 앱 (F02 권한 안내 판단) |
+| `widgetAppearance` | WidgetAppearance | 앱 | 앱, 위젯 (F07, 없거나 깨지면 Auto) |
 | `schemaVersion` | Int (현재 1) | 앱 | 앱 (향후 마이그레이션용) |
 | `debugMockSteps` | Int? | 앱 (DEBUG 빌드만) | 앱 (DEBUG 빌드만) |
 
@@ -103,5 +105,14 @@ App Group `group.com.mel.GOOALL`의 `UserDefaults(suiteName:)`에 JSON(`JSONEnco
 - 앱을 삭제하면 App Group 데이터도 지워지므로 재설치 시 온보딩이 다시 나온다 (F01 수용 기준).
 - v0.2 구매 내역은 StoreKit 2의 `Transaction.currentEntitlements`가 원본이다. 여기에 별도로 저장하지 않는다.
 
+## 6. 위젯 배경 — `WidgetAppearance` (F07)
+```swift
+nonisolated struct WidgetAppearance: Codable, Equatable, Sendable {
+    var backgroundID: String   // "system"(Auto) 또는 WidgetBackgrounds.presets의 id
+}
+```
+- 색 목록·선 색 계산은 `Shared/WidgetAppearance.swift`의 `WidgetBackgrounds` 한 곳. 화면에는 `StageColors`(배경·선 색)를 environment로 내려준다.
+
 ## 변경 이력
 - 2026-10-24: 최초 작성 (F01~F06 열린 질문 정리에 맞춰 공용 모델 정의)
+- 2026-10-24: F07 반영 — Theme.artStyle, WidgetAppearance(§6), 저장 키 widgetAppearance 추가

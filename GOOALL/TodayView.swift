@@ -21,7 +21,7 @@ struct TodayView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
-                    StageImageView(theme: theme, stage: shownStage, size: .large)
+                    StageCard(theme: theme, stage: shownStage, size: .large, appearance: model.appearance)
                         .aspectRatio(1092.0 / 1146.0, contentMode: .fit)
                         .clipShape(.rect(cornerRadius: 32))
                         .animation(.easeInOut(duration: 0.25), value: shownStage)

@@ -11,6 +11,7 @@
 | F04 | 테마 시스템 | [F04-themes.md](F04-themes.md) | Ready | asset-integrator, ios-dev |
 | F05 | 위젯 | [F05-widgets.md](F05-widgets.md) | Ready | widget-dev |
 | F06 | 오늘 화면 | [F06-today-screen.md](F06-today-screen.md) | Ready | ios-dev |
+| F07 | 위젯 배경 색 | [F07-widget-background.md](F07-widget-background.md) | Draft | ios-dev, widget-dev |
 | — | 공용 데이터 모델 | [DATA_MODEL.md](DATA_MODEL.md) | Ready | ios-dev, widget-dev |
 
 ## 상태 값

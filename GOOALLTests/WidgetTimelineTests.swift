@@ -75,30 +75,57 @@ struct WidgetRenderTests {
     func renderAllFamilies(themeID: String, stage: Int) throws {
         for entry in Self.sizes {
             try render(
-                GoalWidgetContent(snapshot: .sample(themeID: themeID, stage: stage), family: entry.family),
+                snapshot: .sample(themeID: themeID, stage: stage),
+                family: entry.family,
                 size: entry.size,
-                lockScreen: entry.family == .accessoryRectangular,
                 name: "\(themeID)_\(entry.name)_\(stage)"
             )
         }
     }
 
+    /// F07: Auto(라이트/다크)와 프리셋 배경마다 선 색이 바뀌는지 (eyeglow 3단계는 실제 이미지)
+    @Test(arguments: [WidgetBackgrounds.systemID] + WidgetBackgrounds.presets.map(\.id), [ColorScheme.light, .dark])
+    func renderBackgrounds(backgroundID: String, scheme: ColorScheme) throws {
+        try render(
+            snapshot: .sample(themeID: "eyeglow", stage: 3),
+            family: .systemLarge,
+            size: CGSize(width: 364, height: 382),
+            appearance: WidgetAppearance(backgroundID: backgroundID),
+            scheme: scheme,
+            name: "bg_\(backgroundID)_\(scheme == .dark ? "dark" : "light")"
+        )
+    }
+
     @Test(arguments: [ColorScheme.light, .dark])
     func renderEmptyState(scheme: ColorScheme) throws {
         try render(
-            GoalWidgetContent(snapshot: nil, family: .systemLarge),
+            snapshot: nil,
+            family: .systemLarge,
             size: CGSize(width: 364, height: 382),
-            lockScreen: false,
             scheme: scheme,
             name: "empty_large_\(scheme == .dark ? "dark" : "light")"
         )
     }
 
-    private func render(_ view: some View, size: CGSize, lockScreen: Bool, scheme: ColorScheme = .light, name: String) throws {
-        let framed = view
+    private func render(
+        snapshot: ProgressSnapshot?,
+        family: WidgetFamily,
+        size: CGSize,
+        appearance: WidgetAppearance = .default,
+        scheme: ColorScheme = .light,
+        name: String
+    ) throws {
+        let lockScreen = family == .accessoryRectangular
+        let framed = Group {
+            if lockScreen {
+                GoalWidgetContent(snapshot: snapshot, family: family)
+                    .background(Color.black)
+                    .foregroundStyle(Color.white)
+            } else {
+                WidgetPreview(snapshot: snapshot, family: family, appearance: appearance)
+            }
+        }
             .frame(width: size.width, height: size.height)
-            .background(lockScreen ? Color.black : Color(.systemBackground))
-            .foregroundStyle(lockScreen ? Color.white : Color.primary)
             .clipShape(.rect(cornerRadius: lockScreen ? 8 : 24))
             .environment(\.colorScheme, lockScreen ? .dark : scheme)
         let renderer = ImageRenderer(content: framed)
