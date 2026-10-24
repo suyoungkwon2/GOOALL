@@ -1,0 +1,40 @@
+name: CI
+
+# 매 push(main)·모든 PR에서 자동 실행. 내용은 scripts/ci.sh와 docs/TEST_PLAN.md 참고.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Build & Test
+    runs-on: macos-26
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select latest Xcode 26
+        run: |
+          XCODE="$(ls -d /Applications/Xcode_26*.app | sort -V | tail -1)"
+          echo "Using $XCODE"
+          sudo xcode-select -s "$XCODE"
+
+      - name: Run CI script
+        run: scripts/ci.sh
+
+      - name: Upload test results & widget renders
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-results
+          path: |
+            build/ci/TestResults.xcresult
+            build/ci/widget-snapshots
+          if-no-files-found: ignore
+          retention-days: 14
