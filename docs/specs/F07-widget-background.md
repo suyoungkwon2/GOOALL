@@ -3,7 +3,7 @@
 - 상태: Ready
 - 담당: ios-dev, widget-dev
 - 관련 스펙: F01(온보딩), F04(테마 이미지), F05(위젯), F06(오늘 화면), [DATA_MODEL](DATA_MODEL.md)
-- 마지막 수정: 2026-10-24
+- 마지막 수정: 2026-10-25
 
 ## 목적
 사용자가 위젯 배경 색을 골라 자기 홈 화면에 어울리게 만든다. 기본값은 기기의 라이트/다크 설정을 따르고, 그림(선)은 배경에 맞춰 잘 보이는 색으로 자동으로 바뀐다.
@@ -36,7 +36,7 @@
 | `lavender` | Lavender | `#E5DBFF` | 검정 |
 | `midnight` | Midnight | `#33384F` | 흰색 |
 
-- 선 색은 목록에 고정하지 않고 배경 밝기(상대 휘도 0.5 기준)로 계산한다. 색을 추가해도 코드 분기가 늘지 않는다.
+- 선 색은 목록에 고정하지 않고 배경 밝기로 계산한다: 상대 휘도 0.179 미만이면 흰 선 (검정·흰색 중 WCAG 대비가 큰 쪽). 색을 추가해도 코드 분기가 늘지 않는다.
 
 ## 문구 (영어, F01 톤)
 - 온보딩 위젯 안내 화면 색 선택 라벨: Pick a color that vibes with your home screen 🎨
@@ -59,3 +59,4 @@
 - 2026-10-24: 열린 질문 답변 — Auto + 파스텔 7색, 온보딩 위젯 안내 화면에서 선택, 오늘 화면에도 적용 → Ready
 - 2026-10-24: 구현 (Shared/WidgetAppearance.swift, StageImageView, GOOALL/BackgroundPicker.swift, widget containerBackground). 수용 기준 3개 테스트로 확인, 설정→위젯 5초 반영은 실기기 확인 필요
 - 2026-10-24: QA 2차 반영 — R4의 `_dark` 조회는 fullColor 테마 추가 시로 연기 명시
+- 2026-10-25: 선 색 기준 휘도 0.5 → 0.179 (대비가 큰 쪽 선택, QA2 보류 항목). 현재 8색 결과는 같음. 문구를 String Catalog에 추가

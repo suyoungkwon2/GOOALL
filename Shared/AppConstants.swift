@@ -5,4 +5,6 @@ nonisolated enum AppConstants {
     static let appName = "GOOALL"
     static let appGroupID = "group.com.mel.GOOALL"
     static let widgetKind = "GOOALLWidget"
+    /// 개인정보 처리방침 (F01-R11). 저장소의 PRIVACY.md. 전용 웹 페이지가 생기면 여기만 바꾼다.
+    static let privacyPolicyURL = URL(string: "https://github.com/suyoungkwon2/GOOALL/blob/main/PRIVACY.md")!
 }

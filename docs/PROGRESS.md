@@ -25,3 +25,4 @@ pm 에이전트가 관리. 작업이 끝날 때마다 한 줄씩 추가.
 - [2026-10-24] [asset-integrator] eyeglow 1~5단계 시험 등록 — 원본 2929×1106 투명 배경 → 흰 배경·규격 크기 변환본(large/medium), 원본은 Assets/Themes/eyeglow/original/. 0·6~10단계는 플레이스홀더. 오버레이 캡슐 대비 강화
 - [2026-10-24] [main] F07 위젯 배경 색: Auto + 파스텔 7색, 선 그림 자동 색(다크 → 흰 선), 온보딩 위젯 미리보기·설정에서 선택, 오늘 화면 동일 적용. eyeglow 이미지 투명 배경으로 재생성. 테스트 62건 통과
 - [2026-10-24] [qa] QA 2차(F07·이미지·QA1 수정분): 🔴0 🟡6 🟢9, 공개 저장소 push 가능. 반영: 위젯 안내 화면 스크롤, 목표 입력란 비우기, README 상태, F07-R4 연기 명시, updateAppearance 테스트. 보류: 선 색 기준값(휘도 0.5 → 0.179 검토, 프리셋 추가 전), refresh 경합 테스트
+- [2026-10-25] [main] 이미지 외 남은 작업: 설정 About(개인정보 처리방침 링크 PRIVACY.md·버전, F01-R11), String Catalog 누락 문구 추가, 선 색 기준 휘도 0.179, Color(hex:) 격리 경고 제거, AppModel 테스트 5건(위젯 갱신 횟수·주간 todayValue·refresh 경합·온보딩 재개·위젯 일치), CD(TestFlight) 워크플로(.github/workflows/release.yml, Secrets 등록 전 미검증), 17e·Pro Max 레이아웃 확인. 테스트 69건 통과 — 남은 것: 이미지(M4), 실기기·Secrets·App Store Connect(사람), /release-check

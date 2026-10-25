@@ -13,6 +13,8 @@ final class AppModel {
 
     private let store: SharedStore
     private let health: HealthDataSource
+    /// 위젯 타임라인 갱신. 테스트에서 호출 횟수를 세기 위해 주입한다 (F02-R5).
+    private let reloadWidgets: () -> Void
 
     private(set) var settings: GoalSettings
     private(set) var snapshot: ProgressSnapshot?
@@ -25,9 +27,14 @@ final class AppModel {
     private(set) var debugMockSteps: Int?
     #endif
 
-    init(store: SharedStore = .shared, health: HealthDataSource = HealthKitStepSource()) {
+    init(
+        store: SharedStore = .shared,
+        health: HealthDataSource = HealthKitStepSource(),
+        reloadWidgets: @escaping () -> Void = { WidgetCenter.shared.reloadAllTimelines() }
+    ) {
         self.store = store
         self.health = health
+        self.reloadWidgets = reloadWidgets
         settings = store.goalSettings ?? .default
         snapshot = store.progressSnapshot
         onboarding = store.onboardingState ?? .initial
@@ -73,7 +80,7 @@ final class AppModel {
     func completeOnboarding() {
         onboarding.isCompleted = true
         store.onboardingState = onboarding
-        WidgetCenter.shared.reloadAllTimelines()
+        reloadWidgets()
     }
 
     // MARK: - Settings (F01-R6)
@@ -89,7 +96,7 @@ final class AppModel {
             apply(value: current.value, todayValue: current.todayValue, now: .now, forceWidgetReload: true)
         } else {
             await refresh()
-            WidgetCenter.shared.reloadAllTimelines()
+            reloadWidgets()
         }
     }
 
@@ -99,7 +106,7 @@ final class AppModel {
         guard newAppearance != appearance else { return }
         appearance = newAppearance
         store.widgetAppearance = newAppearance
-        WidgetCenter.shared.reloadAllTimelines()
+        reloadWidgets()
     }
 
     // MARK: - Health (F02)
@@ -161,7 +168,7 @@ final class AppModel {
         snapshot = newSnapshot
         store.progressSnapshot = newSnapshot
         if forceWidgetReload || previousStage != newSnapshot.stage {
-            WidgetCenter.shared.reloadAllTimelines()
+            reloadWidgets()
         }
     }
 

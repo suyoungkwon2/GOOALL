@@ -16,7 +16,7 @@
 - [V] Apple Developer Program 가입 (연회비 발생, 승인에 1~2일 걸릴 수 있으니 **가장 먼저**)
 - [V] Xcode 26.3 이상 설치
 - [V] Claude Code에 XcodeBuildMCP 추가 (`docs/KICKOFF.md` 0단계)
-- [ ] 개인정보 처리방침 페이지 준비 (간단한 웹 페이지 한 장. 앱스토어 제출 필수)
+- [ ] 개인정보 처리방침 확인: 저장소 루트 `PRIVACY.md` 초안을 읽고 OK/수정 (앱 설정 화면 링크와 App Store Connect의 Privacy Policy URL에 `https://github.com/suyoungkwon2/GOOALL/blob/main/PRIVACY.md` 사용. 연락처는 GitHub Issues로 해 둠 — 이메일을 넣고 싶으면 알려주기)
 
 ## C. Xcode 설정 (GOOALL 프로젝트는 대부분 완료됨)
 완료 확인됨: 프로젝트·위젯 타깃 생성, 서명 Team, HealthKit(+Background Delivery), App Groups(`group.com.mel.GOOALL`, 앱·위젯 양쪽)
@@ -42,7 +42,8 @@
 - [ ] 자정을 넘겨서 리셋되는지 하루 사용 테스트
 
 ## F. 출시 (사람만 가능)
-- [ ] (CD 준비, docs/TEST_PLAN.md 7절) App Store Connect API 키(.p8)·배포 인증서 발급 → GitHub 저장소 Settings → Secrets에 등록
+- [ ] (CD 준비, docs/TEST_PLAN.md 7절) App Store Connect → Users and Access → Integrations → App Store Connect API에서 **Admin** 역할 키 발급(.p8는 한 번만 다운로드됨) → GitHub 저장소 Settings → Secrets and variables → Actions에 `ASC_KEY_ID`, `ASC_ISSUER_ID`, `ASC_KEY_P8`(.p8 내용 전체) 등록. 인증서 파일은 필요 없음
+- [ ] App Store Connect에 앱 등록 후 `git tag v0.1.0 && git push origin v0.1.0` → Actions에서 TestFlight 업로드 확인
 - [ ] `/release-check` 실행하고 "사용자 확인 필요" 항목 처리
 - [ ] App Store Connect에 앱 등록, 개인정보 라벨 작성(건강 데이터 처리 방식)
 - [ ] 스크린샷 촬영 (실기기 홈 화면에 위젯 놓은 모습이 가장 효과적)

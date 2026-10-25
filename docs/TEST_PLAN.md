@@ -11,7 +11,7 @@
 | 마일스톤 QA | 마일스톤 끝 | qa 에이전트 | 스펙↔코드 대조(`/update-spec` C절), 규칙 위반, 심사 리스크 | 수동 실행 |
 | 실기기 테스트 | M5, 큰 변경 후 | 사용자 | 실제 걸음, 백그라운드 갱신, 자정 리셋, 위젯 | ❌ (사람) |
 | 출시 전 점검 | 제출 전 | qa + 사용자 | `/release-check` | 반자동 |
-| CD (TestFlight 배포) | 태그 push (예정, 7절) | GitHub Actions | 서명 빌드 → TestFlight 업로드 | 예정 |
+| CD (TestFlight 배포) | `v*` 태그 push (7절) | GitHub Actions | CI 검사 → 서명 아카이브 → TestFlight 업로드 | ✅ (Secrets 등록 후) |
 
 ## 2. CI (자동)
 - 설정: `.github/workflows/ci.yml` → `scripts/ci.sh` 실행. **로컬에서도 `scripts/ci.sh` 한 줄로 같은 검사**를 돌릴 수 있다.
@@ -30,7 +30,7 @@
 |---|---|---|
 | `ProgressEngineTests.swift` | 진행률·단계·기간·일평균·스냅샷 | F03 수용 기준 전부 (경계값, 자정, 일요일 리셋, 로케일 무관, 서머타임, 비정상 입력) |
 | `SharedModelTests.swift` | 목표 기본값·범위 보정, ThemeRegistry, SharedStore, 위젯 배경 색·선 색 | F01-R5/R8, F04-R2/R7, F07, DATA_MODEL §5·6 |
-| `AppModelTests.swift` | 갱신·설정 변경 흐름 (가짜 HealthDataSource 주입) | F01-R6, F02-R2/R5, F06 (지난 기간 스냅샷은 0) |
+| `AppModelTests.swift` | 갱신·설정 변경 흐름 (가짜 HealthDataSource·위젯 갱신 주입) | F01-R6, 온보딩 재개, F02-R2/R5 (단계 같으면 위젯 갱신 안 함), 주간 todayValue, refresh 경합, F06 (지난 기간 0, 위젯과 같은 엔트리) |
 | `WidgetTimelineTests.swift` | 위젯 타임라인 + 위젯 화면 렌더 (배경 8종 × 라이트/다크 포함) | F05-R5/R8, F05 수용 기준 1·2·3, F07 |
 
 규칙:
@@ -65,13 +65,16 @@ xcrun simctl io <SIM_ID> screenshot shot.png
 - [ ] 앱 삭제 후 재설치 → 온보딩 다시 (F01)
 - [ ] Settings의 "Use fake steps"는 꺼 둘 것 (DEBUG 빌드에만 있음)
 
-## 7. CD (배포 자동화) — 예정
-MVP 기능과 실기기 테스트가 끝난 뒤(M5) 붙인다. 계획:
-- 트리거: `v*` 태그 push (예: `v0.1.0`) → 2절 CI 통과 후 서명 Release 아카이브 → TestFlight 업로드.
-- 방식: GitHub Actions + `xcodebuild archive/-exportArchive` + App Store Connect API 키 (외부 라이브러리 없이). 빌드 번호는 Actions 실행 번호로 자동 증가.
-- 사용자가 준비할 것 (USER_TODO F절): App Store Connect에 앱 등록, API 키(.p8) 발급, 배포 인증서·프로비저닝 → GitHub 저장소 Secrets에 등록. **비밀 값은 절대 저장소에 커밋하지 않는다.**
+## 7. CD (TestFlight 배포)
+- 설정: `.github/workflows/release.yml` → `scripts/ci.sh`(2절 검사 전부) → `scripts/release.sh`(아카이브·업로드). 내보내기 설정은 `scripts/ExportOptions.plist`.
+- 트리거: `v*` 태그 push. 예: `git tag v0.1.0 && git push origin v0.1.0` → 버전 0.1.0, 빌드 번호 = Actions 실행 번호(자동 증가). Actions 탭에서 수동 실행도 가능(버전은 프로젝트 값 유지).
+- 서명: Xcode 자동 서명 + App Store Connect API 키(`-allowProvisioningUpdates`). 배포 인증서는 Apple 클라우드 관리 인증서를 쓰므로 인증서·프로비저닝 파일을 Secrets에 넣지 않는다.
+- 필요한 Secrets (사용자, USER_TODO F절): `ASC_KEY_ID`, `ASC_ISSUER_ID`, `ASC_KEY_P8`(.p8 파일 내용 전체). API 키 역할은 **Admin** (클라우드 관리 배포 인증서 사용 권한 때문). 없으면 워크플로가 안내 메시지와 함께 실패한다. **비밀 값은 절대 저장소에 커밋하지 않는다.**
+- 전제: App Store Connect에 앱(`com.mel.GOOALL`)이 등록되어 있어야 업로드된다.
+- 상태: Secrets 등록 전이라 실제 업로드는 아직 검증 전. 첫 태그 push 결과를 보고 고친다.
 - TestFlight 외부 테스터 배포와 심사 제출은 사람이 App Store Connect에서 직접 한다.
 
 ## 변경 이력
 - 2026-10-24: 최초 작성 (CI 도입, QA 1차 결과 반영)
 - 2026-10-24: F07(위젯 배경 색) 테스트·체크리스트 추가
+- 2026-10-25: CD(TestFlight) 워크플로 추가, AppModel 테스트(위젯 갱신 횟수·주간 todayValue·경합·온보딩 재개·위젯 일치) 추가

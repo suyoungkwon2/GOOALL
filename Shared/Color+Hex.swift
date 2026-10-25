@@ -1,6 +1,6 @@
 import SwiftUI
 
-extension Color {
+nonisolated extension Color {
     /// "#RRGGBB" → Color. 형식이 틀리면 흰색 (theme.json의 overlayTextColor 기본값과 같음).
     init(hex: String) {
         let digits = hex.trimmingCharacters(in: CharacterSet(charactersIn: "#"))

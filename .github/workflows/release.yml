@@ -1,0 +1,38 @@
+name: Release (TestFlight)
+
+# v* 태그 push(예: v0.1.0) 시 CI 검사 → 서명 아카이브 → TestFlight 업로드. docs/TEST_PLAN.md 7절.
+# 필요한 Secrets: ASC_KEY_ID, ASC_ISSUER_ID, ASC_KEY_P8 (App Store Connect API 키 .p8 파일 내용 그대로)
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  testflight:
+    name: CI checks + TestFlight upload
+    runs-on: macos-26
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select latest Xcode 26
+        run: |
+          XCODE="$(ls -d /Applications/Xcode_26*.app | sort -V | tail -1)"
+          echo "Using $XCODE"
+          sudo xcode-select -s "$XCODE"
+
+      - name: Run CI script
+        run: scripts/ci.sh
+
+      - name: Archive and upload to TestFlight
+        env:
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
+          BUILD_NUMBER: ${{ github.run_number }}
+          VERSION_TAG: ${{ github.ref_type == 'tag' && github.ref_name || '' }}
+        run: scripts/release.sh

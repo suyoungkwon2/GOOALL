@@ -53,6 +53,11 @@ struct SettingsView: View {
                     .padding(.vertical, 4)
                 }
 
+                Section("About") {
+                    Link("Privacy Policy", destination: AppConstants.privacyPolicyURL)
+                    LabeledContent("Version", value: Bundle.main.appVersion)
+                }
+
                 #if DEBUG
                 DebugSection()
                 #endif
@@ -75,6 +80,15 @@ struct SettingsView: View {
             guard didLoad, descriptor.allowedRange(for: newDraft.period).contains(newDraft.target) else { return }
             Task { await model.updateSettings(newDraft) }
         }
+    }
+}
+
+private extension Bundle {
+    /// "1.0 (1)" 형식
+    var appVersion: String {
+        let version = infoDictionary?["CFBundleShortVersionString"] as? String ?? "?"
+        let build = infoDictionary?["CFBundleVersion"] as? String ?? "?"
+        return "\(version) (\(build))"
     }
 }
 

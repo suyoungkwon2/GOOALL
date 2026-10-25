@@ -35,9 +35,11 @@ nonisolated enum WidgetBackgrounds {
         presets.first { $0.id == id }?.hex ?? (isDark ? systemDarkHex : systemLightHex)
     }
 
-    /// 어두운 배경이면 흰 선 (F07-R3). 상대 휘도 0.5 기준.
+    /// 어두운 배경이면 흰 선 (F07-R3). 기준 0.179 = 검정·흰색과의 대비(WCAG)가 같아지는 휘도. 대비가 큰 쪽을 고른다.
+    static let lightLineLuminanceThreshold = 0.179
+
     static func usesLightLines(onHex hex: String) -> Bool {
-        relativeLuminance(hex: hex) < 0.5
+        relativeLuminance(hex: hex) < lightLineLuminanceThreshold
     }
 
     static func relativeLuminance(hex: String) -> Double {

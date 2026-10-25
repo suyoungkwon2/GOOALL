@@ -67,6 +67,12 @@ struct WidgetBackgroundTests {
         #expect(WidgetBackgrounds.usesLightLines(onHex: WidgetBackgrounds.presets.first { $0.id == "midnight" }!.hex))
     }
 
+    /// 중간 밝기에서는 대비가 큰 쪽: 회색 #808080(휘도 0.216)은 검정 선, #666666(0.133)은 흰 선
+    @Test func lineColorPicksHigherContrastAtMidLuminance() {
+        #expect(!WidgetBackgrounds.usesLightLines(onHex: "#808080"))
+        #expect(WidgetBackgrounds.usesLightLines(onHex: "#666666"))
+    }
+
     @Test func presetsIgnoreDarkModeAndUnknownIDFallsBackToAuto() {
         #expect(WidgetBackgrounds.backgroundHex(id: "pink", isDark: true) == "#FFD6E2")
         #expect(WidgetBackgrounds.backgroundHex(id: "nope", isDark: true) == "#1C1C1E")
