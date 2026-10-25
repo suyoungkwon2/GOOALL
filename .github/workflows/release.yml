@@ -7,6 +7,9 @@ on:
     tags: ['v*']
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 concurrency:
   group: release
   cancel-in-progress: false
@@ -33,6 +36,5 @@ jobs:
           ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
           ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
           ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
-          BUILD_NUMBER: ${{ github.run_number }}
           VERSION_TAG: ${{ github.ref_type == 'tag' && github.ref_name || '' }}
         run: scripts/release.sh

@@ -7,7 +7,7 @@
 #   ASC_KEY_P8                 .p8 파일 내용 (-----BEGIN PRIVATE KEY----- 포함)
 # 선택:
 #   VERSION_TAG   v0.1.0 형식이면 MARKETING_VERSION=0.1.0 (없으면 프로젝트 값 유지)
-#   BUILD_NUMBER  CURRENT_PROJECT_VERSION (없으면 현재 시각 yyyyMMddHHmm)
+#   BUILD_NUMBER  CURRENT_PROJECT_VERSION (없으면 UTC 현재 시각 yyyyMMddHHmm — CI·로컬 모두 이 형식으로 통일해 번호가 거꾸로 가지 않게 한다)
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
@@ -31,7 +31,7 @@ AUTH_ARGS=(
   -authenticationKeyIssuerID "$ASC_ISSUER_ID"
 )
 
-VERSION_ARGS=("CURRENT_PROJECT_VERSION=${BUILD_NUMBER:-$(date +%Y%m%d%H%M)}")
+VERSION_ARGS=("CURRENT_PROJECT_VERSION=${BUILD_NUMBER:-$(date -u +%Y%m%d%H%M)}")
 if [[ "${VERSION_TAG:-}" =~ ^v([0-9]+(\.[0-9]+){1,2})$ ]]; then
   VERSION_ARGS+=("MARKETING_VERSION=${BASH_REMATCH[1]}")
 fi

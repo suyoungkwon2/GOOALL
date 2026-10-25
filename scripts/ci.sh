@@ -49,11 +49,20 @@ xcrun xcresulttool get test-results summary --path "$RESULT_BUNDLE" | grep -E '"
 echo "▶︎ 3/4 Release build"
 xcodebuild "${COMMON[@]}" -scheme GOOALL -configuration Release -destination "generic/platform=iOS Simulator" build | tail -3
 
-echo "▶︎ 4/4 No DEBUG code in Release (F02-R8)"
+echo "▶︎ 4/4 No DEBUG code in Release (F02-R8), privacy manifest present"
 RELEASE_BINARY="$DERIVED_DATA/Build/Products/Release-iphonesimulator/GOOALL.app/GOOALL"
 if strings "$RELEASE_BINARY" | grep -E "debugMockSteps|-debugOnboardingStep|Use fake steps"; then
   echo "✘ DEBUG-only code found in Release binary" >&2
   exit 1
 fi
+
+# 개인정보 매니페스트가 앱·위젯 번들 둘 다에 있어야 업로드가 거절되지 않는다 (ITMS-91053)
+RELEASE_APP="$DERIVED_DATA/Build/Products/Release-iphonesimulator/GOOALL.app"
+for bundle in "$RELEASE_APP" "$RELEASE_APP/PlugIns/widgetExtension.appex"; do
+  if [ ! -f "$bundle/PrivacyInfo.xcprivacy" ]; then
+    echo "✘ PrivacyInfo.xcprivacy missing in $bundle" >&2
+    exit 1
+  fi
+done
 
 echo "✔ CI passed"

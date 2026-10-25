@@ -22,6 +22,7 @@
   2. `GOOALLTests` 전체 (iOS 26+ iPhone 시뮬레이터)
   3. Release 구성 빌드
   4. Release 바이너리에 DEBUG 전용 문자열(`debugMockSteps`, `-debugOnboardingStep`, `Use fake steps`)이 없는지 (F02-R8)
+  5. 앱·위젯 번들에 개인정보 매니페스트 `PrivacyInfo.xcprivacy`가 있는지 (없으면 업로드 거절 ITMS-91053)
 - 결과물: Actions 실행 페이지의 **ci-results** 아티팩트 = 테스트 결과(`TestResults.xcresult`) + 위젯 렌더 PNG(`widget-snapshots/`, 단계 0/5/10 × Large/Medium/잠금화면). 14일 보관.
 - CI가 실패하면: main에 머지하지 않는다. 에이전트는 다음 작업 전에 원인을 고치고, 고칠 수 없으면 사용자에게 보고한다.
 
@@ -67,7 +68,7 @@ xcrun simctl io <SIM_ID> screenshot shot.png
 
 ## 7. CD (TestFlight 배포)
 - 설정: `.github/workflows/release.yml` → `scripts/ci.sh`(2절 검사 전부) → `scripts/release.sh`(아카이브·업로드). 내보내기 설정은 `scripts/ExportOptions.plist`.
-- 트리거: `v*` 태그 push. 예: `git tag v0.1.0 && git push origin v0.1.0` → 버전 0.1.0, 빌드 번호 = Actions 실행 번호(자동 증가). Actions 탭에서 수동 실행도 가능(버전은 프로젝트 값 유지).
+- 트리거: `v*` 태그 push. 예: `git tag v0.1.0 && git push origin v0.1.0` → 버전 0.1.0, 빌드 번호 = 업로드 시각(UTC `yyyyMMddHHmm`, 로컬 `scripts/release.sh`와 같은 형식이라 번호가 거꾸로 가지 않음). Actions 탭에서 수동 실행도 가능(버전은 프로젝트 값 유지).
 - 서명: Xcode 자동 서명 + App Store Connect API 키(`-allowProvisioningUpdates`). 배포 인증서는 Apple 클라우드 관리 인증서를 쓰므로 인증서·프로비저닝 파일을 Secrets에 넣지 않는다.
 - 필요한 Secrets (사용자, USER_TODO F절): `ASC_KEY_ID`, `ASC_ISSUER_ID`, `ASC_KEY_P8`(.p8 파일 내용 전체). API 키 역할은 **Admin** (클라우드 관리 배포 인증서 사용 권한 때문). 없으면 워크플로가 안내 메시지와 함께 실패한다. **비밀 값은 절대 저장소에 커밋하지 않는다.**
 - 전제: App Store Connect에 앱(`com.mel.GOOALL`)이 등록되어 있어야 업로드된다.
@@ -78,3 +79,4 @@ xcrun simctl io <SIM_ID> screenshot shot.png
 - 2026-10-24: 최초 작성 (CI 도입, QA 1차 결과 반영)
 - 2026-10-24: F07(위젯 배경 색) 테스트·체크리스트 추가
 - 2026-10-25: CD(TestFlight) 워크플로 추가, AppModel 테스트(위젯 갱신 횟수·주간 todayValue·경합·온보딩 재개·위젯 일치) 추가
+- 2026-10-25: QA 3차 반영 — 개인정보 매니페스트 확인 단계, 빌드 번호 UTC 시각으로 통일

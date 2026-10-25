@@ -14,7 +14,7 @@ final class AppModel {
     private let store: SharedStore
     private let health: HealthDataSource
     /// 위젯 타임라인 갱신. 테스트에서 호출 횟수를 세기 위해 주입한다 (F02-R5).
-    private let reloadWidgets: () -> Void
+    private let reloadWidgets: @MainActor () -> Void
 
     private(set) var settings: GoalSettings
     private(set) var snapshot: ProgressSnapshot?
@@ -30,7 +30,7 @@ final class AppModel {
     init(
         store: SharedStore = .shared,
         health: HealthDataSource = HealthKitStepSource(),
-        reloadWidgets: @escaping () -> Void = { WidgetCenter.shared.reloadAllTimelines() }
+        reloadWidgets: @escaping @MainActor () -> Void = { WidgetCenter.shared.reloadAllTimelines() }
     ) {
         self.store = store
         self.health = health

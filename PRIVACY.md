@@ -36,7 +36,7 @@ Some themes may be offered as a one-time in-app purchase. Each purchase unlocks 
 - **Payment is handled by Apple.** Purchases go through the App Store and your Apple Account, under [Apple's Privacy Policy](https://www.apple.com/legal/privacy/). We never receive your name, email address, Apple Account or payment card details.
 - **Checking your purchases happens on your device.** The app uses Apple's StoreKit to confirm which themes you own. We do not run a server to check or store purchases, and we keep no purchase history about you.
 - **What we can see:** Apple gives developers sales and payment reports (for example, how many copies of a theme were sold in a country). These reports do not identify you.
-- **Restoring purchases:** themes you bought are tied to your Apple Account. On a new device or after reinstalling, sign in with the same Apple Account and use "Restore Purchases" in the app's settings.
+- **Restoring purchases:** themes you bought are tied to your Apple Account. On a new device or after reinstalling, sign in with the same Apple Account and use "Restore Purchases" in the app's settings (available once paid themes are offered).
 - **Refunds:** refunds are handled by Apple. You can request one at [reportaproblem.apple.com](https://reportaproblem.apple.com).
 
 ## Storage, sharing and tracking
