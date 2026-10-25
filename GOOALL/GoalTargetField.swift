@@ -13,7 +13,7 @@ struct GoalTargetField: View {
         VStack(spacing: 12) {
             // 키 입력마다 바로 반영 (숫자 키패드엔 Return이 없어 커밋 시점에 의존하지 않는다)
             TextField("Steps", text: Binding(
-                get: { target.formatted() },
+                get: { target == 0 ? "" : target.formatted() },
                 set: { target = Int($0.filter(\.isNumber)) ?? 0 }
             ))
                 .keyboardType(.numberPad)

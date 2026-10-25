@@ -303,6 +303,7 @@ private struct WidgetGuideStep: View {
             primaryTitle: "Done",
             primaryAction: { model.completeOnboarding() }
         ) {
+            ScrollView {
             VStack(alignment: .leading, spacing: 14) {
                 // 실제 위젯 모습 미리보기 + 배경 색 선택 (F07-R5)
                 WidgetPreview(
@@ -332,6 +333,9 @@ private struct WidgetGuideStep: View {
                 Text("Bigger widget = bigger glow-up. Trust me.")
                     .font(.footnote.weight(.semibold))
             }
+            }
+            .scrollIndicators(.hidden)
+            .scrollBounceBehavior(.basedOnSize)
         }
     }
 }

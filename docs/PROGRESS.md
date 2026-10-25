@@ -24,3 +24,4 @@ pm 에이전트가 관리. 작업이 끝날 때마다 한 줄씩 추가.
 - [2026-10-24] [main] GitHub 업로드(suyoungkwon2/GOOALL) + 첫 CI 성공 (https://github.com/suyoungkwon2/GOOALL/actions/runs/40132003819)
 - [2026-10-24] [asset-integrator] eyeglow 1~5단계 시험 등록 — 원본 2929×1106 투명 배경 → 흰 배경·규격 크기 변환본(large/medium), 원본은 Assets/Themes/eyeglow/original/. 0·6~10단계는 플레이스홀더. 오버레이 캡슐 대비 강화
 - [2026-10-24] [main] F07 위젯 배경 색: Auto + 파스텔 7색, 선 그림 자동 색(다크 → 흰 선), 온보딩 위젯 미리보기·설정에서 선택, 오늘 화면 동일 적용. eyeglow 이미지 투명 배경으로 재생성. 테스트 62건 통과
+- [2026-10-24] [qa] QA 2차(F07·이미지·QA1 수정분): 🔴0 🟡6 🟢9, 공개 저장소 push 가능. 반영: 위젯 안내 화면 스크롤, 목표 입력란 비우기, README 상태, F07-R4 연기 명시, updateAppearance 테스트. 보류: 선 색 기준값(휘도 0.5 → 0.179 검토, 프리셋 추가 전), refresh 경합 테스트

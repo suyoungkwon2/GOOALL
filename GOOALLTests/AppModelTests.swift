@@ -99,6 +99,18 @@ struct AppModelTests {
         #expect(model.snapshot?.value == 30_000)
     }
 
+    /// F07-R5: 배경 색 변경은 저장되고, 같은 값이면 아무것도 하지 않는다
+    @Test func updatingAppearancePersists() {
+        let store = makeStore()
+        let model = AppModel(store: store, health: FakeHealthSource())
+        #expect(model.appearance == .default)
+
+        model.updateAppearance(WidgetAppearance(backgroundID: "lavender"))
+        #expect(model.appearance.backgroundID == "lavender")
+        #expect(store.widgetAppearance.backgroundID == "lavender")
+        #expect(AppModel(store: store, health: FakeHealthSource()).appearance.backgroundID == "lavender")
+    }
+
     @Test func staleSnapshotIsShownAsZeroAndNotCarriedIntoNewSettings() async {
         let store = makeStore()
         let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: .now)!
