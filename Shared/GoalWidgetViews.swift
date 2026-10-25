@@ -55,6 +55,7 @@ struct HomeGoalView: View {
                 }
                 Text("\(snapshot.value.formatted()) / \(snapshot.target.formatted())")
                     .monospacedDigit()
+                    .contentTransition(.numericText(value: Double(snapshot.value)))
                     .lineLimit(1)
                     .minimumScaleFactor(0.7)
             }

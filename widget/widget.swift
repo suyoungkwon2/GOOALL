@@ -57,6 +57,7 @@ struct GoalWidgetEntryView: View {
         GoalWidgetContent(snapshot: entry.snapshot, family: family)
             .environment(\.stageColors, colors)
             .foregroundStyle(family == .accessoryRectangular ? Color.primary : colors.line)
+            .widgetURL(AppConstants.todayURL)
             .containerBackground(for: .widget) {
                 if family == .accessoryRectangular {
                     Color.clear

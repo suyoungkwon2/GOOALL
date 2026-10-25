@@ -13,7 +13,8 @@
 - [V] 한국어만 지원할지, 영어도 할지 결정 (스펙 F01에 반영): 영어만 우선 지원, 한국어 및 다국어는 추후 지원
 
 ## B. 계정·환경 (사람만 가능)
-- [V] Apple Developer Program 가입 (연회비 발생, 승인에 1~2일 걸릴 수 있으니 **가장 먼저**)
+- [ ] Apple Developer Program 가입 (연회비 발생, 승인에 1~2일 걸릴 수 있으니 **가장 먼저**) — 2026-10-25 확인: 아직 미가입(Xcode 팀이 무료 Personal Team). 가입 전에는 App Store Connect·TestFlight 불가
+  - 가입 후: Xcode 두 타깃(GOOALL, widgetExtension)의 Signing Team을 유료 팀으로 변경 → 새 팀 ID를 Claude에게 알려 `scripts/ExportOptions.plist` 수정
 - [V] Xcode 26.3 이상 설치
 - [V] Claude Code에 XcodeBuildMCP 추가 (`docs/KICKOFF.md` 0단계)
 - [ ] 개인정보 처리방침 확인: 저장소 루트 `PRIVACY.md` 초안을 읽고 OK/수정 (앱 설정 화면 링크와 App Store Connect의 Privacy Policy URL에 `https://github.com/suyoungkwon2/GOOALL/blob/main/PRIVACY.md` 사용. 연락처는 GitHub Issues로 해 둠 — 이메일을 넣고 싶으면 알려주기)

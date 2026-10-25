@@ -47,6 +47,13 @@ struct TodayView: View {
                 }
             }
             .sheet(isPresented: $showsSettings) { SettingsView() }
+            // 위젯을 탭해서 열면 설정·미리보기를 닫고 지금 상태를 보여준다 (F05-R7)
+            .onOpenURL { url in
+                guard url == AppConstants.todayURL else { return }
+                showsSettings = false
+                isPreviewing = false
+                previewStage = Double(currentStage)
+            }
             .task { await model.refresh() }
         }
     }

@@ -43,6 +43,9 @@
 - 테마 변경 시 진행 값은 유지, 단계 수가 다르면 progress 비율로 재계산한다.
 - 저장된 테마가 레지스트리에 없거나 `isUnlocked == false`이면 `sixpack`으로 대체한다 (v0.2 환불·제거 대비).
 - v0.2 유료화(1회 구매로 테마 구매) 때 할 일: StoreKit 2 상품 등록, 해당 테마를 `.paid(productID:)`로 변경, `ThemeAccessPolicy`를 `Transaction.currentEntitlements` 기반으로 교체, 테마 선택 화면에 잠금/구매 UI 추가. 위젯은 정책 결과만 따른다.
+  - 상품 유형은 **Non-Consumable**(테마 1개 = 상품 1개). 설정 화면에 **"Restore Purchases"** 버튼 필수 (심사 가이드라인 3.1.1, 개인정보 처리방침 `PRIVACY.md` "In-app purchases" 절에 이미 안내됨)
+  - 구매 확인은 기기 안 StoreKit 2만 사용, 서버 없음 → App Store Connect 개인정보 라벨은 "Data Not Collected" 유지 가능. 서버 검증·분석을 붙이면 라벨과 `PRIVACY.md`를 같이 고친다
+  - 결정 필요(사용자): Family Sharing 허용 여부, 가격 등급
 
 ## 콘텐츠 가이드라인 (심사 대응)
 - 노골적 성적 표현 금지. 신체 테마는 "만화/일러스트풍 또는 상징적 표현" 우선.
@@ -65,3 +68,4 @@
 - 2026-10-24: 표시명·문구를 영어로 확정, 0단계 응원 문구 작성(R6 Must로). 선택 테마 5개 추가(R8, 탱탱한 엉덩이는 제외). 유료 1회 구매는 v0.2로 미루고 구조만 대비(R7)
 - 2026-10-24: eyeglow 1~5단계 시험 이미지 등록(Shared/Themes.xcassets). 수치 오버레이 캡슐을 진하게(밝은 이미지에서도 읽히도록)
 - 2026-10-24: Theme.artStyle 추가(sixpack·eyeglow = lineArt). eyeglow 이미지를 투명 배경으로 재생성
+- 2026-10-25: v0.2 유료화 할 일에 Non-Consumable·구매 복원 버튼·개인정보 라벨 조건 추가 (PRIVACY.md에 인앱 구매 절 추가와 맞춤)

@@ -37,7 +37,16 @@
     "%lld" : {
 
     },
+    "About" : {
+
+    },
+    "Auto" : {
+
+    },
     "Back to now" : {
+
+    },
+    "Background" : {
 
     },
     "Belly era → Six-pack era" : {
@@ -47,6 +56,9 @@
 
     },
     "Can I peek at your steps?" : {
+
+    },
+    "Cream" : {
 
     },
     "Daily" : {
@@ -79,10 +91,10 @@
     "I only read your step count from Health. Read-only, and it never leaves your phone. Pinky promise 🤙" : {
 
     },
-    "Illustration: home screen with the large GOOALL widget" : {
+    "Last step, and it's the big one!" : {
 
     },
-    "Last step, and it's the big one!" : {
+    "Lavender" : {
 
     },
     "Let's go" : {
@@ -92,6 +104,15 @@
 
     },
     "Maybe later" : {
+
+    },
+    "Midnight" : {
+
+    },
+    "Milk" : {
+
+    },
+    "Mint" : {
 
     },
     "Next" : {
@@ -109,10 +130,19 @@
     "Period" : {
 
     },
+    "Pick a color that vibes with your home screen 🎨" : {
+
+    },
     "Pick the big one" : {
 
     },
     "Pick the look you want. Every step you take changes your home screen. Literally." : {
+
+    },
+    "Pink" : {
+
+    },
+    "Privacy Policy" : {
 
     },
     "Put me on your home screen." : {
@@ -131,6 +161,9 @@
 
     },
     "Six-pack: unlocked. You ate that 🔥" : {
+
+    },
+    "Sky" : {
 
     },
     "Sleepy eyes? Same. Let's wake them up 👀" : {
@@ -183,6 +216,9 @@
     "Turn it on" : {
 
     },
+    "Version" : {
+
+    },
     "Walk it. Get it." : {
 
     },
@@ -205,6 +241,9 @@
         }
       }
     },
+    "Widget" : {
+
+    },
     "Your six-pack's waiting. Let's get walking 🚶‍♀️" : {
 
     },
@@ -212,48 +251,6 @@
 
     },
     "Zombie eyes → Sparkly eyes" : {
-
-    },
-    "Auto" : {
-
-    },
-    "Pick a color that vibes with your home screen 🎨" : {
-
-    },
-    "Background" : {
-
-    },
-    "Widget" : {
-
-    },
-    "Cream" : {
-
-    },
-    "Lavender" : {
-
-    },
-    "Midnight" : {
-
-    },
-    "Milk" : {
-
-    },
-    "Mint" : {
-
-    },
-    "Pink" : {
-
-    },
-    "Sky" : {
-
-    },
-    "About" : {
-
-    },
-    "Privacy Policy" : {
-
-    },
-    "Version" : {
 
     }
   },
